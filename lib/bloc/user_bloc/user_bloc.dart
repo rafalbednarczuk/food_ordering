@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:food_ordering/repository/user_repository.dart';
 import 'package:food_ordering/bloc/user_bloc/bloc.dart';
 import 'package:bloc/bloc.dart';
@@ -12,22 +14,31 @@ class _UpdateUser extends UserEvent {
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository _userRepository;
+  final List<StreamSubscription> _ss;
 
   UserBloc({UserRepository userRepository})
-      : _userRepository = userRepository ?? UserRepository() {
-    _fetchUser();
+      : _userRepository = userRepository ?? UserRepository(),
+        _ss = [] {
+    _ss.add(_listenToUser());
   }
 
-  Future _fetchUser() async {
-    final user = await _userRepository.getUser();
-    this.add(_UpdateUser(user));
+  @override
+  void close() {
+    _ss.forEach((ss) => ss.cancel());
+    super.close();
+  }
+
+  StreamSubscription _listenToUser() {
+    return _userRepository.getUser().listen((user) {
+      this.add(_UpdateUser(user));
+    });
   }
 
   @override
   UserState get initialState => UserState.initial();
 
   @override
-  Stream<UserState> mapEventToState(UserEvent event) async*{
+  Stream<UserState> mapEventToState(UserEvent event) async* {
     if (event is _UpdateUser) {
       yield state.setUser(event.user);
     } else if (event is Login) {
