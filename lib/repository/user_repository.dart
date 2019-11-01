@@ -1,6 +1,7 @@
 import 'package:food_ordering/model/user/user.dart';
 import 'package:food_ordering/provider/shared_preferences_provider.dart';
 import 'package:food_ordering/provider/api_provider.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:rxdart/rxdart.dart';
 
 class UserRepository {
@@ -32,7 +33,7 @@ class UserRepository {
     final response = await _apiProvider.login(email, password);
     if (response != null && response.statusCode == 200) {
       final user = User.fromJson(response.data);
-      _spProvider.setUser(user);
+      unawaited(_spProvider.setUser(user));
       _user.add(user);
     }
   }
