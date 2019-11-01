@@ -33,7 +33,7 @@ class SharedPreferencesProvider {
 
   Future<void> setUser(User user) async {
     if (user == null) {
-      (await _preferences.first).setString(_userSpKey, null);
+      await (await _preferences.first).setString(_userSpKey, null);
       return;
     }
     await (await _preferences.first)
