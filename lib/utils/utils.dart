@@ -14,10 +14,12 @@ class AppColors {
   static const login = 0xffff2d55;
 }
 
-class AppTextStyles  {
+class AppTextStyles {
   static const loginScreenDefault = TextStyle(
     fontSize: 15,
     color: Colors.white,
     fontFamily: 'SFUIDisplay',
   );
 }
+
+const contentDefaultHorizontalPadding = EdgeInsets.symmetric(horizontal: 24.0);
