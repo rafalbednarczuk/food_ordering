@@ -27,19 +27,22 @@ class Login extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         child: TextFormField(
-                          style: Text_styles.textstyle,
+                          style: 
+                          AppTextStyles.loginScreenDefault,
                           decoration: InputDecoration(
                               enabledBorder: const UnderlineInputBorder(
                                 borderSide: BorderSide(
                                   color: Colors.white,
                                 ),
                               ),
-                              labelText: Strings.username,
-                              labelStyle: Text_styles.textstyle),
+                              labelText: AppStrings.username,
+                              labelStyle: 
+                              AppTextStyles.loginScreenDefault),
                         ),
                       ),
                       TextFormField(
-                        style: Text_styles.textstyle,
+                        style: 
+                        AppTextStyles.loginScreenDefault,
                         obscureText: true,
                         decoration: InputDecoration(
                           enabledBorder: const UnderlineInputBorder(
@@ -47,8 +50,9 @@ class Login extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                          labelText: Strings.password,
-                          labelStyle: Text_styles.textstyle,
+                          labelText: AppStrings.password,
+                          labelStyle: 
+                          AppTextStyles.loginScreenDefault,
                         ),
                       ),
                     ],
@@ -56,8 +60,9 @@ class Login extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20, bottom: 5),
-                  child: Text(Strings.forgot_psswd,
-                      textAlign: TextAlign.right, style: Text_styles.textstyle),
+                  child: Text(AppStrings.forgotPassword,
+                      textAlign: TextAlign.right, style: 
+                      AppTextStyles.loginScreenDefault),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
@@ -65,8 +70,9 @@ class Login extends StatelessWidget {
                     onPressed: () {
                       //TODO: Regular Login Logic
                     },
-                    child: Text(Strings.login, style: Text_styles.textstyle),
-                    color: Color(App_colors.login),
+                    child: Text(AppStrings.login, style: 
+                    AppTextStyles.loginScreenDefault),
+                    color: Color(AppColors.login),
                     elevation: 0,
                     minWidth: 350,
                     height: 60,
@@ -86,7 +92,8 @@ class Login extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         Icon(FontAwesomeIcons.facebookSquare),
-                        Text(Strings.login_fb, style: Text_styles.textstyle),
+                        Text(AppStrings.loginFacebook, style: 
+                        AppTextStyles.loginScreenDefault),
                       ],
                     ),
                     color: Colors.transparent,
@@ -105,12 +112,13 @@ class Login extends StatelessWidget {
                       child: RichText(
                           text: TextSpan(children: [
                     TextSpan(
-                        text: Strings.no_accont, style: Text_styles.textstyle),
+                        text: AppStrings.noAccount, style: 
+                        AppTextStyles.loginScreenDefault),
                     TextSpan(
-                        text: Strings.sign_up,
+                        text: AppStrings.signUp,
                         style: TextStyle(
                           fontFamily: 'SFUIDisplay',
-                          color: Color(App_colors.login),
+                          color: Color(AppColors.login),
                           fontSize: 15,
                         )),
                   ]))),

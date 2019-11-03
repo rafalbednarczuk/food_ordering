@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-class Strings {
+class AppStrings {
   static const username = 'Username';
   static const password = 'Password';
-  static const no_accont = "Don't have an account? ";
-  static const sign_up = "Sign up";
-  static const forgot_psswd = 'Forgot your password?';
-  static const login = 'LOGIN';
-  static const login_fb = 'Sign up with Facebook';
+  static const noAccount = "Don't have an account? ";
+  static const signUp = "Sign up";
+  static const forgotPassword = 'Forgot your password?';
+  static const login = 'Login';
+  static const loginFacebook = 'Sign up with Facebook';
 }
 
-class App_colors {
+class AppColors {
   static const login = 0xffff2d55;
 }
 
-class Text_styles {
-  static const textstyle = TextStyle(
+class AppTextStyles  {
+  static const loginScreenDefault = TextStyle(
     fontSize: 15,
     color: Colors.white,
     fontFamily: 'SFUIDisplay',
