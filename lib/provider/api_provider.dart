@@ -6,14 +6,14 @@ class ApiProvider {
 
   final Dio _dio;
 
-  factory ApiProvider() {
+  factory ApiProvider({Dio dio}) {
     if (_provider == null) {
-      _provider = ApiProvider._init();
+      _provider = ApiProvider._init(dio);
     }
     return _provider;
   }
 
-  ApiProvider._init() : _dio = Dio();
+  ApiProvider._init(Dio dio) : _dio = dio ?? Dio();
 
   Future<Response> login(email, password) async {
     final loginRequest = LoginRequest(email, password);
