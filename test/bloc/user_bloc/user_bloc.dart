@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:food_ordering/model/user/user.dart';
 import 'package:food_ordering/provider/api_provider.dart';
