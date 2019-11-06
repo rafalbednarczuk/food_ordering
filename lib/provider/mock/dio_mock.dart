@@ -44,7 +44,7 @@ class DioMock extends Mock implements Dio {
   }
 
   Future<String> getJson(path) async {
-    final categoryJson = File("provider/mock/$path.json");
+    final categoryJson = File("lib/provider/mock/$path.json");
     final json = await categoryJson.readAsString();
     return json;
   }
