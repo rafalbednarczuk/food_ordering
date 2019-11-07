@@ -25,9 +25,11 @@ class UserRepository {
     return _user.stream;
   }
 
+/*
   Future<void> setUser(User user) async {
     await _spProvider.setUser(user);
   }
+*/
 
   Future<void> login(String email, String password) async {
     final response = await _apiProvider.login(email, password);

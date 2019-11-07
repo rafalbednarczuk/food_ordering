@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:food_ordering/model/user/user.dart';
 
-class UserState {
+class UserState  extends Equatable {
   final bool loadingUser;
   final User user;
 
@@ -17,4 +18,7 @@ class UserState {
   UserState.loggedOut()
       : loadingUser = false,
         user = null;
+
+  @override
+  List<Object> get props => [loadingUser, user];
 }
