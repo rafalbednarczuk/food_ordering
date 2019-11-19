@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_ordering/bloc/user_bloc/bloc.dart';
 import 'package:food_ordering/ui/logo.dart';
-import 'package:food_ordering/ui/screens/login_screen.dart';
+import 'package:food_ordering/ui/screens/login_register_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
           */} else {
             //TODO: implement navigation to LoginRegisterScreen
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => LoginScreen()));
+                MaterialPageRoute(builder: (context) => LoginRegisterScreen()));
           }
         }
       },
