@@ -2,26 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:food_ordering/utils/utils.dart';
 
-class LoginScreen extends StatefulWidget {
+enum LoginRegisterPage { login, register }
+
+class LoginRegisterScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _LoginRegisterScreenState createState() => _LoginRegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  FocusNode _passwordFocusNode, _emailFocusNode;
-  bool isSignUp;
+class _LoginRegisterScreenState extends State<LoginRegisterScreen> {
+  FocusNode _passwordFocusNode;
+  FocusNode _emailFocusNode;
+  LoginRegisterPage _page;
+
   @override
   void initState() {
     super.initState();
     _passwordFocusNode = FocusNode();
     _emailFocusNode = FocusNode();
-    isSignUp = false;
+    _page = LoginRegisterPage.login;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.transparent,
       body: Stack(
         children: <Widget>[
           Positioned(
@@ -63,14 +66,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       AnimatedContainer(
-                        duration: Duration(seconds: 1),
+                        curve: Curves.easeInCubic,
+                        duration: Duration(milliseconds: 200),
                         padding: EdgeInsets.only(bottom: 20),
-                        height: isSignUp ? 80.0 : 0.0,
+                        height:
+                            _page == LoginRegisterPage.register ? 80.0 : 0.0,
                         child: TextFormField(
                           focusNode: _emailFocusNode,
                           style: AppTextStyles.loginScreenDefault,
                           decoration: InputDecoration(
-                              enabledBorder: isSignUp
+                              enabledBorder: _page == LoginRegisterPage.register
                                   ? UnderlineInputBorder(
                                       borderSide: BorderSide(
                                         color: Colors.white,
@@ -107,19 +112,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20, bottom: 5),
-                  child: Text(isSignUp ? "" : AppStrings.forgotPassword,
-                      textAlign: TextAlign.right,
-                      style: AppTextStyles.loginScreenDefault),
-                ),
+                if (_page == LoginRegisterPage.login)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20, bottom: 5),
+                    child: InkWell(
+                      onTap: () {
+                        //TODO: forgot password logic
+                      },
+                      child: Text(AppStrings.forgotPassword,
+                          textAlign: TextAlign.right,
+                          style: AppTextStyles.loginScreenDefault),
+                    ),
+                  ),
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: MaterialButton(
                     onPressed: () {
                       //TODO: Regular Login Logic
                     },
-                    child: Text(isSignUp ? AppStrings.signUp : AppStrings.login,
+                    child: Text(
+                        _page == LoginRegisterPage.register
+                            ? AppStrings.signUp
+                            : AppStrings.login,
                         style: AppTextStyles.loginScreenDefault),
                     color: Color(AppColors.login),
                     elevation: 0,
@@ -162,12 +176,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: RichText(
                         text: TextSpan(children: [
                       TextSpan(
-                          text: isSignUp
+                          text: _page == LoginRegisterPage.register
                               ? AppStrings.yesAccount
                               : AppStrings.noAccount,
                           style: AppTextStyles.loginScreenDefault),
                       TextSpan(
-                          text: isSignUp ? AppStrings.login : AppStrings.signUp,
+                          text: _page == LoginRegisterPage.register
+                              ? AppStrings.login
+                              : AppStrings.signUp,
                           style: TextStyle(
                             fontFamily: 'SFUIDisplay',
                             color: Color(AppColors.login),
@@ -189,7 +205,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   signUp() {
     setState(() {
-      isSignUp = !isSignUp;
+      if (_page == LoginRegisterPage.register) {
+        _page = LoginRegisterPage.login;
+      } else {
+        _page = LoginRegisterPage.register;
+      }
     });
   }
 }
