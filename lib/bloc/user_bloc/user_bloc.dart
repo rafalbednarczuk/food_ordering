@@ -23,9 +23,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   }
 
   @override
-  void close() {
+  Future<void> close() async {
     _ss.forEach((ss) => ss.cancel());
-    super.close();
+    await super.close();
+  }
+
+
+  @override
+  void onError(Object error, StackTrace stacktrace) {
+    throw error;
   }
 
   StreamSubscription _listenToUser() {

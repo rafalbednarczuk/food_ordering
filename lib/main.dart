@@ -5,6 +5,6 @@ import 'package:food_ordering/ui/screens/splash_screen.dart';
 
 void main() => runApp(MultiBlocProvider(providers: [
       BlocProvider<UserBloc>(
-        builder: (context) => UserBloc(),
+        create: (context) => UserBloc(),
       ),
     ], child: MaterialApp(home: SplashScreen())));
