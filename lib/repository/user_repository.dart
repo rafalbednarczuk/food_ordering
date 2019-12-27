@@ -21,15 +21,9 @@ class UserRepository {
     _user.add(await _spProvider.getUser());
   }
 
-  ValueObservable<User> getUser() {
+  ValueStream<User> getUser() {
     return _user.stream;
   }
-
-/*
-  Future<void> setUser(User user) async {
-    await _spProvider.setUser(user);
-  }
-*/
 
   Future<void> login(String email, String password) async {
     final response = await _apiProvider.login(email, password);
@@ -42,5 +36,6 @@ class UserRepository {
 
   void logout() {
     _spProvider.setUser(null);
+    _user.add(null);
   }
 }
