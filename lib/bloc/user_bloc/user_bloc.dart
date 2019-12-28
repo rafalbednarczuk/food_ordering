@@ -48,7 +48,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     if (event is _UpdateUser) {
       yield state.setUser(event.user);
     } else if (event is Login) {
-      unawaited(_userRepository.login(event.email, event.password));
+      unawaited(_userRepository.login(event.username, event.password));
     } else if (event is Logout) {
       _userRepository.logout();
     }

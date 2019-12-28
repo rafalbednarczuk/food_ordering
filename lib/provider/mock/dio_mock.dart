@@ -1,13 +1,16 @@
 import 'dart:convert';
-import 'dart:io';
-
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:dio/dio.dart';
 import 'package:mockito/mockito.dart';
 
 class DioMock extends Mock implements Dio {
   final Duration delay;
+  final Function(String path) getJson;
 
-  DioMock({this.delay = const Duration(milliseconds: 200)});
+  DioMock(
+      {this.delay = const Duration(milliseconds: 200),
+      Function(String path) getJson})
+      : getJson = getJson ?? getJsonFlutter;
 
   @override
   Future<Response<T>> post<T>(
@@ -20,7 +23,23 @@ class DioMock extends Mock implements Dio {
     ProgressCallback onReceiveProgress,
   }) async {
     await delayedDuration();
-    if (path == "login") {
+    if (["login"].contains(path)) {
+      return successful(path);
+    } else {
+      return error(path);
+    }
+  }
+
+  @override
+  Future<Response<T>> get<T>(
+    String path, {
+    Map<String, dynamic> queryParameters,
+    Options options,
+    CancelToken cancelToken,
+    ProgressCallback onReceiveProgress,
+  }) async {
+    await delayedDuration();
+    if (["restaurants"].contains(path)) {
       return successful(path);
     } else {
       return error(path);
@@ -43,9 +62,8 @@ class DioMock extends Mock implements Dio {
     return Response(statusCode: 404);
   }
 
-  Future<String> getJson(path) async {
-    final categoryJson = File("lib/provider/mock/$path.json");
-    final json = await categoryJson.readAsString();
+  static Future<String> getJsonFlutter(path) async {
+    final json = await rootBundle.loadString("assets/mock/$path.json");
     return json;
   }
 }
