@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:food_ordering/model/restaurant/restaurant.dart';
 import 'package:food_ordering/provider/api_provider.dart';
 import 'package:rxdart/rxdart.dart';
