@@ -17,7 +17,7 @@ class UserRepositoryMock extends Mock implements UserRepository {}
 class SharedPreferencesProviderMock extends Mock
     implements SharedPreferencesProvider {}
 
-main() async {
+void main() async {
   group('user states', () {
     UserBloc userBloc;
     final userRepository = UserRepositoryMock();
@@ -50,7 +50,8 @@ main() async {
     test('login on logged out', () async {
       final user = User.fromJson(jsonDecode(await getJson("login")));
       final spProvider = SharedPreferencesProviderMock();
-      final apiProvider = ApiProvider(dio: DioMock(delay: Duration.zero));
+      final apiProvider =
+          ApiProvider(dio: DioMock(delay: Duration.zero, getJson: getJson));
       final userRepository =
           UserRepository(spProvider: spProvider, apiProvider: apiProvider);
       when(spProvider.getUser()).thenAnswer((_) => Future.value(null));
@@ -68,7 +69,7 @@ main() async {
 }
 
 Future<String> getJson(path) async {
-  final categoryJson = File("lib/provider/mock/$path.json");
+  final categoryJson = File("assets/mock/$path.json");
   final json = await categoryJson.readAsString();
   return json;
 }

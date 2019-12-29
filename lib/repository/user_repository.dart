@@ -17,7 +17,7 @@ class UserRepository {
     _fetchUserFromSp();
   }
 
-  void _fetchUserFromSp() async {
+  Future<void> _fetchUserFromSp() async {
     _user.add(await _spProvider.getUser());
   }
 
@@ -27,7 +27,7 @@ class UserRepository {
 
   Future<void> login(String email, String password) async {
     final response = await _apiProvider.login(email, password);
-    if (response != null && response.statusCode == 200) {
+    if (response?.data != null && response.statusCode == 200) {
       final user = User.fromJson(response.data);
       unawaited(_spProvider.setUser(user));
       _user.add(user);

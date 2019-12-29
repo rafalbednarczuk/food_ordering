@@ -1,10 +1,10 @@
 abstract class UserEvent {}
 
 class Login extends UserEvent {
-  final String email;
+  final String username;
   final String password;
 
-  Login(this.email, this.password);
+  Login(this.username, this.password);
 }
 
 class Logout extends UserEvent {}
